@@ -8,6 +8,12 @@ public class HorseArmorTier {
     private boolean isEnabled;
     
     /**
+     * The item associated with this tier. This will be null, until the item can be
+     * constructed.
+     */
+    private ItemHorseArmorBase item;
+    
+    /**
      * The name of this armor tier. No spaces, all lower case.
      */
     private String tierName;
@@ -109,5 +115,28 @@ public class HorseArmorTier {
     public String getTierName () {
         
         return this.tierName;
+    }
+    
+    /**
+     * Retrieves the ItemHorseArmorBase associated with this armor tier. This will be null
+     * until the Item can construct. This will be after the tier is constructed, and after the
+     * configuration file has a chance to sync.
+     * 
+     * @return ItemHorseArmorBase: The item associated with this armor tier.
+     */
+    public ItemHorseArmorBase getItem () {
+        
+        return item;
+    }
+    
+    /**
+     * Sets the ItemHorseArmorBase associated with this armor tier. This should only be used
+     * when you first construct the Item related to this tier.
+     * 
+     * @param item: The item associated with this armor tier.
+     */
+    public void setItem (ItemHorseArmorBase item) {
+        
+        this.item = item;
     }
 }

@@ -2,13 +2,16 @@ package net.epoxide.mha;
 
 import java.util.HashMap;
 
+import net.epoxide.mha.handler.MHAConfigurationHandler;
 import net.epoxide.mha.item.HorseArmorTier;
-import net.minecraftforge.common.config.Configuration;
+import net.epoxide.mha.item.ItemHorseArmorBase;
+import net.epoxide.mha.item.ItemManager;
 
+//TODO move to other mod.
 public class MetallurgyItems {
     
     /**
-     * 
+     * Map of all metallurgy horse armor tiers.
      */
     public static HashMap<String, HorseArmorTier> sets = new HashMap();
     
@@ -60,27 +63,26 @@ public class MetallurgyItems {
         addArmorTier("platinum", 5, "Metallurgy:platinum.ingot");
         addArmorTier("brass", 2, "Metallurgy:brass.ingot");
         addArmorTier("electrum", 5, "Metallurgy:electrum.ingot");
+        
+        for (HorseArmorTier tier : MetallurgyItems.sets.values()) {
+            
+            MHAConfigurationHandler.configureArmorTier(tier);
+            tier.setItem(new ItemHorseArmorBase(tier));
+            ItemManager.addTierRecipe(tier);
+        }
     }
     
     /**
+     * Adds a new armor tier to the map of sets added by this addon.
      * 
-     * @param name
-     * @param protection
-     * @param recipeItem
+     * @param name: The name for this set, should be all lower cased with no spaces or
+     *            underscores.
+     * @param protection: The amount of protection this tier should have by default.
+     * @param recipeItem: The ID for the item/block used for crafting this armor.
      */
     public void addArmorTier (String name, int protection, String recipeItem) {
         
-        sets.put(name, new HorseArmorTier(name, protection, recipeItem));
-    }
-    
-    public void syncConfig (Configuration cfg) {
-        
-        for (HorseArmorTier entry : sets.values()) {
-            
-            String tierName = entry.getTierName();
-            entry.setEnabled(cfg.getBoolean(tierName + "Enabled", "Armor Accessibility", true, "If set to false, the " + tierName + " horse armor will not be added to the game. Changes made through the config GUI require a restart to take effect."));
-            entry.setProtectionAmount(cfg.getInt(tierName + "Armor", "Armor Values", entry.getProtectionAmount(), 0, Integer.MAX_VALUE, "The amount of protection provided by a piece of " + tierName + " horse armor. Can be changed while the game is running through config GUI."));
-            entry.setRecipeItemName(cfg.getString(tierName + "RepairItem", "Repair Items", entry.getRecipeItemName(), "The String based item ID for the item used to craft this set of armor. Changes made through the config GUI require a restart to take effect."));
-        }
+        String prefix = "metallurgy.";
+        sets.put(prefix + name, new HorseArmorTier(prefix + name, protection, recipeItem));
     }
 }

@@ -24,6 +24,16 @@ public class ItemHorseArmorBase extends ItemHorseArmor {
     private int armorPoints;
     
     /**
+     * Constructs a basic piece of horse armor using a HorseArmorTier.
+     * 
+     * @param tier: The Tier to use when constructing this Item.
+     */
+    public ItemHorseArmorBase(HorseArmorTier tier) {
+        
+        this(tier.getTierName(), tier.getProtectionAmount());
+    }
+    
+    /**
      * Constructs a basic piece of horse armor. The only customizable properties are the name,
      * texture and armor points.
      *
