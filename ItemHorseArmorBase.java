@@ -1,15 +1,13 @@
-package net.epoxide.mha.item;
+package net.darkhax.bookshelf;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.darkhax.bookshelf.items.ItemHorseArmor;
-import net.darkhax.bookshelf.util.Utilities;
 import net.minecraft.client.renderer.entity.RendererLivingEntity;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 
 public class ItemHorseArmorBase extends ItemHorseArmor {
     
@@ -26,7 +24,7 @@ public class ItemHorseArmorBase extends ItemHorseArmor {
     /**
      * Constructs a basic piece of horse armor. The only customizable properties are the name,
      * texture and armor points.
-     *
+     * 
      * @param name: A name to use for this piece of armor. Used in unlocalized name, item id,
      *            and texture path.
      * @param armorPoints: The amount of protection this piece of armor should provide. Iron is
@@ -44,8 +42,7 @@ public class ItemHorseArmorBase extends ItemHorseArmor {
     @Override
     public int getArmorValue (EntityHorse horse, ItemStack stack) {
         
-        int nbtArmor = checkArmorNBT(stack);
-        return nbtArmor > 0 ? nbtArmor : this.armorPoints;
+        return this.armorPoints;
     }
     
     @Override
@@ -64,21 +61,5 @@ public class ItemHorseArmorBase extends ItemHorseArmor {
     @SideOnly(Side.CLIENT)
     public void onArmorRendering (EntityHorse entity, ItemStack stack, RendererLivingEntity renderer, double posX, double posY, double posZ, int flag) {
     
-    }
-    
-    /**
-     * Checks an ItemStack for a custom armor value written in it's NBT. Allows for HorseArmor
-     * to be given a special armor value from NBT.
-     * 
-     * @param stack: The ItemStack to check for armor values in NBT.
-     * @return int: The armor value for this item. If the armor does not have a custom armor
-     *         value, -1 will be given. 0 May also be given in odd and nearly impossible
-     *         situations.
-     */
-    public static int checkArmorNBT (ItemStack stack) {
-        
-        Utilities.preparedataTag(stack);
-        NBTTagCompound dataTag = stack.getTagCompound();
-        return dataTag.hasKey("armorValue") ? dataTag.getInteger("armorValue") : -1;
     }
 }

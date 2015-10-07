@@ -1,58 +1,65 @@
 package net.epoxide.mha;
 
-import cpw.mods.fml.common.Loader;
+import com.teammetallurgy.metallurgy.api.IMetalSet;
+import com.teammetallurgy.metallurgy.api.MetallurgyApi;
+
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import net.epoxide.mha.addon.Addon;
-import net.epoxide.mha.addon.metallurgy.AddonMetallurgy;
 import net.epoxide.mha.common.ProxyCommon;
-import net.epoxide.mha.item.MHAItems;
 import net.epoxide.mha.util.Constants;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemStack;
 
-import java.util.ArrayList;
-
-@Mod(modid = Constants.MOD_ID, name = Constants.MOD_NAME, version = Constants.VERSION_NUMBER, guiFactory = Constants.FACTORY, dependencies = "required-after:bookshelf")
+@Mod(modid = Constants.MOD_ID, name = Constants.MOD_NAME, version = Constants.VERSION_NUMBER, guiFactory = Constants.FACTORY, dependencies = "required-after:bookshelf;required-after:Metallurgy")
 public class MoreHorseArmor {
-
+    
     @SidedProxy(clientSide = Constants.CLIENT_PROXY_CLASS, serverSide = Constants.SERVER_PROXY_CLASS)
     public static ProxyCommon proxy;
-
+    
     @Mod.Instance(Constants.MOD_ID)
     public static MoreHorseArmor instance;
-    private ArrayList<Addon> addonList = new ArrayList<Addon>();
-
+    
     @EventHandler
     public void preInit (FMLPreInitializationEvent event) {
-
-        proxy.registerSidedEvents();
-
-        new MHAItems();
-
-        if (Loader.isModLoaded("Metallurgy")) {
-
-            addonList.add(new AddonMetallurgy());
-        }
-
-        for (Addon addon : addonList)
-            addon.preInit();
+    
     }
-
+    
     @EventHandler
     public void init (FMLInitializationEvent event) {
-
-        for (Addon addon : addonList)
-            addon.init();
+    
     }
-
+    
     @EventHandler
     public void postInit (FMLPostInitializationEvent event) {
-
-        for (Addon addon : addonList)
-            addon.postInit();
+        
+        String quote = "\"";
+        for (String setName : MetallurgyApi.getSetNames()) {
+            
+            if (!setName.equals("utility")) {
+                
+                System.out.println(setName);
+                IMetalSet set = MetallurgyApi.getMetalSet(setName);
+                
+                for (String tierName : set.getMetalNames()) {
+                    
+                    ItemStack legs = set.getLeggings(tierName);
+                    ItemStack ingot = set.getIngot(tierName);
+                    
+                    if (legs != null && ingot != null && legs.getItem() != null && ingot.getItem() != null) {
+                        
+                        String eName = tierName.toLowerCase().replaceAll("\\s+", "");
+                        int ePortection = ((ItemArmor) legs.getItem()).damageReduceAmount;
+                        String recipeItem = Item.itemRegistry.getNameForObject(ingot.getItem());
+                        
+                        System.out.println("addArmorTier (" + quote + eName + quote + ", " + ePortection + ", " + quote + recipeItem + quote + "),");
+                    }
+                }
+            }
+        }
     }
-
 }
