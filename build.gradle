@@ -14,12 +14,14 @@ buildscript {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
     }
 }
+
 repositories {
     maven {
-        name = "Team Metallurgy Maven"
-        url = "http://shadow.gcod.net/maven"
+        name = "Epoxide"
+        url = "http://maven.cubedlc.com"
     }
 }
+
 apply plugin: 'forge'
 
 version = "1.0"
@@ -32,7 +34,7 @@ minecraft {
 }
 
 dependencies {
-    compile "com.teammetallurgy:Metallurgy:1.7.10-4.0.8.128:deobf"
+    compile "net.darkhax.bookshelf:Bookshelf:1.0.0:deobf"
 }
 
 processResources
