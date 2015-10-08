@@ -12,9 +12,22 @@ public class MHAConfigurationHandler {
      */
     public static Configuration config;
     
+    /**
+     * Should our new villager spawn?
+     */
+    public static boolean allowVillager = true;
+    
+    /**
+     * The ID for the new villager.
+     */
+    public static int villagerID = 89725;
+    
     public MHAConfigurationHandler(File configFile) {
         
         config = new Configuration(configFile);
+        
+        allowVillager = config.getBoolean("allowVillager", "Villager", allowVillager, "Should the rancher villager spawn?");
+        villagerID = config.getInt("villagerID", "Villager", villagerID, Integer.MIN_VALUE, Integer.MAX_VALUE, "What id should the villager use?");
         
         if (config.hasChanged())
             config.save();
