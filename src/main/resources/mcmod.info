@@ -1,14 +1,14 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
+  "modid": "MoreHorseArmor",
+  "name": "More Horse Armor",
+  "description": "Adds various sets of horse armor to the game, along with providing tools to add your own sets.",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
-  "authorList": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
+  "authorList": ["Darkhax", "lclc98"],
+  "credits": "The Bookshelf team.",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []
