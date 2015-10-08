@@ -63,7 +63,7 @@ if(System.getenv().ARTIFACT_VERSION != null) {
     artifact_version = "${system.getenv().ARTIFACT_VERSION}"
 }
 
-version = "${config.minecraft_version}-${artifact_version}"
+version = "1.7.10-${artifact_version}"
 
 processResources {
     // this will ensure that this task is redone when the versions change.
