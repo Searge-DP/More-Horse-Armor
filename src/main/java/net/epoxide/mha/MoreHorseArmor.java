@@ -10,7 +10,7 @@ import net.epoxide.mha.common.ProxyCommon;
 import net.epoxide.mha.handler.MHAConfigurationHandler;
 import net.epoxide.mha.util.Constants;
 
-@Mod(modid = Constants.MOD_ID, name = Constants.MOD_NAME, version = Constants.VERSION_NUMBER, guiFactory = Constants.FACTORY, dependencies = "required-after:bookshelf;after:Metallurgy")
+@Mod(modid = Constants.MOD_ID, name = Constants.MOD_NAME, version = Constants.VERSION_NUMBER, guiFactory = Constants.FACTORY, dependencies = "required-after:bookshelf")
 public class MoreHorseArmor {
     
     @SidedProxy(clientSide = Constants.CLIENT_PROXY_CLASS, serverSide = Constants.SERVER_PROXY_CLASS)
@@ -23,9 +23,6 @@ public class MoreHorseArmor {
     public void preInit (FMLPreInitializationEvent event) {
         
         new MHAConfigurationHandler(event.getSuggestedConfigurationFile());
-        
-        // TODO move to other mod.
-        new MetallurgyItems();
     }
     
     @EventHandler
