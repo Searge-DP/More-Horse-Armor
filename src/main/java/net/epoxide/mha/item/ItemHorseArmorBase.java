@@ -48,7 +48,7 @@ public class ItemHorseArmorBase extends ItemHorseArmor {
         this.armorPoints = armorPoints;
         this.setUnlocalizedName("mha." + name);
         this.setCreativeTab(CreativeTabs.tabCombat);
-        GameRegistry.registerItem(this, "armor_" + name);
+        GameRegistry.registerItem(this, "armor_" + name.replaceAll("[.]", "_"));
     }
     
     @Override
