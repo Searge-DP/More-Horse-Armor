@@ -19,6 +19,11 @@ public class ItemHorseArmorBase extends ItemHorseArmor {
     private String name;
     
     /**
+     * A version of the armor name which is guaranteed to not have dots in it. Used for texture paths.
+     */
+    private String propperName;
+    
+    /**
      * The amount of protection offered by this piece of armor.
      */
     private int armorPoints;
@@ -45,10 +50,12 @@ public class ItemHorseArmorBase extends ItemHorseArmor {
     public ItemHorseArmorBase(String name, int armorPoints) {
         
         this.name = name;
+        this.propperName = name.replaceAll("[.]", "_");
         this.armorPoints = armorPoints;
         this.setUnlocalizedName("mha." + name);
+        this.setTextureName("morehorsearmor:" + propperName + "_horse_armor");
         this.setCreativeTab(CreativeTabs.tabCombat);
-        GameRegistry.registerItem(this, "armor_" + name.replaceAll("[.]", "_"));
+        GameRegistry.registerItem(this, "armor_" + propperName);
     }
     
     @Override
@@ -67,7 +74,7 @@ public class ItemHorseArmorBase extends ItemHorseArmor {
     @SideOnly(Side.CLIENT)
     public String getArmorTexture (EntityHorse horse, ItemStack stack) {
         
-        return "mha:textures/entity/horse/armor/horse_armor_" + this.name + ".png";
+        return "morehorsearmor:textures/entity/horse/armor/horse_armor_" + this.propperName + ".png";
     }
     
     @Override
