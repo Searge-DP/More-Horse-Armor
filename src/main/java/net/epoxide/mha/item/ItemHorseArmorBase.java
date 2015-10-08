@@ -19,7 +19,8 @@ public class ItemHorseArmorBase extends ItemHorseArmor {
     private String name;
     
     /**
-     * A version of the armor name which is guaranteed to not have dots in it. Used for texture paths.
+     * A version of the armor name which is guaranteed to not have dots in it. Used for texture
+     * paths.
      */
     private String propperName;
     
