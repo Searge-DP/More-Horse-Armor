@@ -20,6 +20,18 @@ repositories {
         name = "Epoxide"
         url = "http://maven.cubedlc.com"
     }
+    maven {
+        name = "rx14"
+        url = "http://mvn.rx14.co.uk/local/"
+    }
+    ivy {
+        name "rx14"
+        artifactPattern "http://mvn.rx14.co.uk/local/com/azanor/baubles/Baubles/1.7.10-1.0.1.9.3/[module]-[classifier]-[revision].[ext]"
+    }
+    ivy {
+        name "Botania"
+        artifactPattern "http://botaniamod.net/files/deobf/[module] [revision]-[classifier].[ext]"
+    }
 }
 
 apply plugin: 'forge'
@@ -35,6 +47,9 @@ minecraft {
 
 dependencies {
     compile "net.darkhax.bookshelf:Bookshelf:1.0.0:deobf"
+    compile name: "Botania" , version: "r1.7-224", classifier: "deobf"
+    compile name: "Baubles" , version: "1.7.10-1.0.1.9.3", classifier: "deobf"
+
 }
 
 task buildInfo() {
