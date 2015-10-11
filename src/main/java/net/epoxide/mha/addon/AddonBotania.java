@@ -9,6 +9,6 @@ public class AddonBotania {
         
         ItemManager.initTieredHorseArmor(new HorseArmorTier("terrasteel", 6, "Botania:manaResource#4"));
         ItemManager.initTieredHorseArmor(new HorseArmorTier("elementium", 5, "Botania:manaResource#7"));
-        ItemManager.initTieredHorseArmor(new HorseArmorTier("terrasteel", 6, "Botania:manaResource#0"));
+        ItemManager.initTieredHorseArmor(new HorseArmorTier("manasteel", 6, "Botania:manaResource#0"));
     }
 }
