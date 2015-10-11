@@ -22,9 +22,4 @@ public class ItemHorseArmorFlame extends ItemHorseArmorBase {
         attacker.setFire(MathHelper.ceiling_float_int(amount / 2));
         return false;
     }
-
-    @Override
-    public void onHorseUpdate (EntityHorse horse, ItemStack stack) {
-
-    }
 }
