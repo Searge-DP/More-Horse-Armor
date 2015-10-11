@@ -1,6 +1,7 @@
 package net.epoxide.mha.item;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.epoxide.mha.handler.MHAConfigurationHandler;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
@@ -16,6 +17,20 @@ public class ItemManager {
         
         ItemHorseArmorBase nature = new ItemHorseArmorNature("nature", 11);
         // TODO nature recipe
+    }
+    
+    /**
+     * Sets up a basic set of armor, based on a HorseArmorTier instance. This will configure
+     * the tier to make sure it's fully synced, construct the item and set it to the tier, and
+     * add a basic recipe.
+     * 
+     * @param tier: The HorseArmorTier to initialize and turn into horse armor.
+     */
+    public static void initTieredHorseArmor (HorseArmorTier tier) {
+        
+        MHAConfigurationHandler.configureArmorTier(tier);
+        tier.setItem(new ItemHorseArmorBase(tier));
+        addTierRecipe(tier);
     }
     
     /**
