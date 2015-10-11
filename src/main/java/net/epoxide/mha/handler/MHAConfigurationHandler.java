@@ -46,7 +46,7 @@ public class MHAConfigurationHandler {
         String tierName = tier.getTierName();
         tier.setEnabled(config.getBoolean(tierName + "Enabled", "Armor Accessibility", true, "If set to false, the " + tierName + " horse armor will not be added to the game."));
         tier.setProtectionAmount(config.getInt(tierName + "Armor", "Armor Values", tier.getProtectionAmount(), 0, Integer.MAX_VALUE, "The amount of protection provided by a piece of " + tierName + " horse armor."));
-        tier.setRecipeItemName(config.getString(tierName + "RepairItem", "Repair Items", tier.getRecipeItemName(), "The String based item ID for the item used to craft this set of armor."));
+        tier.setRecipeString(config.getString(tierName + "RepairItem", "Repair Items", tier.getRecipeItemName(), "The String based item ID for the item used to craft this set of armor."));
         
         if (config.hasChanged())
             config.save();

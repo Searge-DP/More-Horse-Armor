@@ -1,5 +1,8 @@
 package net.epoxide.mha.item;
 
+import net.darkhax.bookshelf.util.Utilities;
+import net.minecraft.item.ItemStack;
+
 public class HorseArmorTier {
     
     /**
@@ -21,7 +24,7 @@ public class HorseArmorTier {
     /**
      * A string based ID to use in the crafting recipe for this tier.
      */
-    private String recipeItemName;
+    private String recipeString;
     
     /**
      * The amount of protection provided by this armor tier.
@@ -42,7 +45,7 @@ public class HorseArmorTier {
         
         this.isEnabled = true;
         this.tierName = name;
-        this.recipeItemName = recipeID;
+        this.recipeString = recipeID;
         this.protectionAmount = protection;
     }
     
@@ -68,23 +71,21 @@ public class HorseArmorTier {
     }
     
     /**
-     * Retrieves the ID for the item/block to use for this armors crafting recipe.
-     * 
-     * @return String: The ID of the item/block to use in this tiers crafting recipe.
+     * Retrieves a damage sensitive representation of the item used to craft this armor.
+     * @return ItemStack: An ItemStack which represents the item used to craft this armor.
      */
-    public String getRecipeItemName () {
+    public ItemStack getRecipeItem() {
         
-        return recipeItemName;
+        return Utilities.createStackFromString(this.recipeString);
     }
     
     /**
-     * Sets the ID to use for this tiers crafting recipe.
-     * 
-     * @param recipeItemName: The new ID to use for this tiers recipe.
+     * Sets the recipe string used for this armor tier.
+     * @param recipeString: A string containing item id and damage of the material used to craft the armor of this tier.
      */
-    public void setRecipeItemName (String recipeItemName) {
+    public void setRecipeString (String recipeString) {
         
-        this.recipeItemName = recipeItemName;
+        this.recipeString = recipeString;
     }
     
     /**
