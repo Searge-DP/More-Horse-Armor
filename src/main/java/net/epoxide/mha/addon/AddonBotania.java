@@ -1,13 +1,23 @@
 package net.epoxide.mha.addon;
 
+import net.epoxide.mha.handler.MHAConfigurationHandler;
+import net.epoxide.mha.item.HorseArmorTier;
+import net.epoxide.mha.item.ItemHorseArmorBase;
+import net.epoxide.mha.item.ItemManager;
+
 public class AddonBotania {
     
-    // public static Item itemHorseArmorTerrasteel = ItemManager.addTierRecipe(new
-    // ItemHorseArmorTerrasteel("terrasteel", 6), new ItemStack((Item)
-    // Item.itemRegistry.getObject("Botania:manaResource"), 1, 4));
-    // public static Item itemHorseArmorElementium = ItemManager.addTierRecipe(new
-    // ItemHorseArmorTerrasteel("elementium", 5), new ItemStack((Item)
-    // Item.itemRegistry.getObject("Botania:manaResource"), 1, 7));
-    // public static Item itemHorseArmorManasteel = ItemManager.addTierRecipe(new
-    // ItemHorseArmorTerrasteel("manasteel", 5), "Botania:manaResource");
+    public AddonBotania() {
+        
+        addHorseArmor(new HorseArmorTier("terrasteel", 6, "Botania:manaResource#4"));
+        addHorseArmor(new HorseArmorTier("elementium", 5, "Botania:manaResource#7"));
+        addHorseArmor(new HorseArmorTier("terrasteel", 6, "Botania:manaResource#0"));
+    }
+    
+    public void addHorseArmor(HorseArmorTier tier) {
+        
+        MHAConfigurationHandler.configureArmorTier(tier);
+        tier.setItem(new ItemHorseArmorBase(tier));
+        ItemManager.addTierRecipe(tier);
+    }
 }
