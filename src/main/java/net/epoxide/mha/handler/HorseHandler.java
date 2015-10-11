@@ -11,25 +11,25 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 
 public class HorseHandler {
-
+    
     @SubscribeEvent
     public void onHorseHit (LivingHurtEvent event) {
-
+        
         if (event.entity instanceof EntityHorse && (event.source.getDamageType().equals("player") || event.source.getDamageType().equals("player"))) {
             EntityHorse entityHorse = (EntityHorse) event.entity;
-
+            
             AnimalChest chest = ObfuscationReflectionHelper.getPrivateValue(EntityHorse.class, entityHorse, "horseChest", "");
             ItemStack armor = chest.getStackInSlot(1);
             if (armor != null && armor.getItem() instanceof ItemHorseArmorBase) {
                 event.setCanceled(((ItemHorseArmorBase) armor.getItem()).damage(entityHorse, event.ammount, event.source.getEntity()));
             }
         }
-
+        
     }
-
+    
     @SubscribeEvent
-    public void onTooltipDisplayed(ItemTooltipEvent event) {
-
+    public void onTooltipDisplayed (ItemTooltipEvent event) {
+        
         if (event.itemStack != null && event.itemStack.getItem() != null)
             event.toolTip.add("Name: " + Item.itemRegistry.getNameForObject(event.itemStack.getItem()));
     }

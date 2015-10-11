@@ -10,17 +10,17 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.BonemealEvent;
 
 public class ItemHorseArmorNature extends ItemHorseArmorBase {
-
+    
     int tick = 0;
-
-    public ItemHorseArmorNature (String name, int armorPoints) {
-
+    
+    public ItemHorseArmorNature(String name, int armorPoints) {
+        
         super(name, armorPoints);
     }
-
+    
     @Override
     public void onHorseUpdate (EntityHorse horse, ItemStack stack) {
-
+        
         if (horse.riddenByEntity instanceof EntityPlayer) {
             // 5 seconds
             if (tick == 20 * 5) {
@@ -33,7 +33,7 @@ public class ItemHorseArmorNature extends ItemHorseArmorBase {
                 BonemealEvent event = new BonemealEvent(entityPlayer, world, block, x, y, z);
                 if (MinecraftForge.EVENT_BUS.post(event))
                     return;
-
+                    
                 if (block instanceof IGrowable) {
                     IGrowable igrowable = (IGrowable) block;
                     if (igrowable.func_149851_a(world, x, y, z, world.isRemote)) {
@@ -46,7 +46,7 @@ public class ItemHorseArmorNature extends ItemHorseArmorBase {
                 }
                 tick = 0;
             }
-
+            
             tick++;
         }
     }
