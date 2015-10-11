@@ -46,7 +46,7 @@ minecraft {
 }
 
 dependencies {
-    compile "net.darkhax.bookshelf:Bookshelf:1.0.0:deobf"
+    compile "net.darkhax.bookshelf:Bookshelf:1.7.10-1.0.0.12:deobf"
     compile name: "Botania" , version: "r1.7-224", classifier: "deobf"
     compile name: "Baubles" , version: "1.7.10-1.0.1.9.3", classifier: "deobf"
 
