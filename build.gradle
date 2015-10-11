@@ -20,10 +20,6 @@ repositories {
         name = "Epoxide"
         url = "http://maven.cubedlc.com"
     }
-    maven {
-        name = "rx14"
-        url = "http://mvn.rx14.co.uk/local/"
-    }
     ivy {
         name "rx14"
         artifactPattern "http://mvn.rx14.co.uk/local/com/azanor/baubles/Baubles/1.7.10-1.0.1.9.3/[module]-[classifier]-[revision].[ext]"
@@ -38,7 +34,7 @@ apply plugin: 'forge'
 
 version = "1.0"
 group = "net.epoxide.mha" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "MHA"
+archivesBaseName = "MoreHorseArmor"
 
 minecraft {
     version = "1.7.10-10.13.4.1517-1.7.10"
