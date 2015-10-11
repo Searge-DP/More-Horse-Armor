@@ -27,21 +27,12 @@ public class MoreHorseArmor {
     @EventHandler
     public void preInit (FMLPreInitializationEvent event) {
         
+        new MHAConfigurationHandler(event.getSuggestedConfigurationFile());
+        new ItemManager();
+        
         if (Loader.isModLoaded("Botania"))
             new AddonBotania();
             
-        new ItemManager();
         MinecraftForge.EVENT_BUS.register(new HorseHandler());
-        new MHAConfigurationHandler(event.getSuggestedConfigurationFile());
-    }
-    
-    @EventHandler
-    public void init (FMLInitializationEvent event) {
-    
-    }
-    
-    @EventHandler
-    public void postInit (FMLPostInitializationEvent event) {
-    
     }
 }
