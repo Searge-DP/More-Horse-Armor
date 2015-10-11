@@ -81,7 +81,7 @@ public class HorseArmorTier {
         return Utilities.createStackFromString(this.recipeString);
     }
     
-    public String getRecipeString() {
+    public String getRecipeString () {
         
         return this.recipeString;
     }
