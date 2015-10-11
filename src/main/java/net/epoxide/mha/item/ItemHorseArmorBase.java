@@ -5,6 +5,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.darkhax.bookshelf.items.ItemHorseArmor;
 import net.darkhax.bookshelf.util.Utilities;
+import net.epoxide.mha.handler.MHAConfigurationHandler;
 import net.minecraft.client.renderer.entity.RendererLivingEntity;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -38,6 +39,7 @@ public class ItemHorseArmorBase extends ItemHorseArmor {
     public ItemHorseArmorBase(HorseArmorTier tier) {
         
         this(tier.getTierName(), tier.getProtectionAmount());
+        tier.setProtectionAmount(this.armorPoints);
     }
     
     /**
@@ -53,7 +55,7 @@ public class ItemHorseArmorBase extends ItemHorseArmor {
         
         this.name = name;
         this.propperName = name.replaceAll("[.]", "_");
-        this.armorPoints = armorPoints;
+        this.armorPoints = MHAConfigurationHandler.configureArmorPoints(name, armorPoints);
         this.setUnlocalizedName("mha." + name);
         this.setTextureName("morehorsearmor:" + propperName + "_horse_armor");
         this.setCreativeTab(CreativeTabs.tabCombat);
