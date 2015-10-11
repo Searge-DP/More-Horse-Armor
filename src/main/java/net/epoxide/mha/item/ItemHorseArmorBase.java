@@ -1,5 +1,7 @@
 package net.epoxide.mha.item;
 
+import java.util.List;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -10,8 +12,10 @@ import net.minecraft.client.renderer.entity.RendererLivingEntity;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityHorse;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.StatCollector;
 
 public class ItemHorseArmorBase extends ItemHorseArmor {
     
@@ -87,13 +91,20 @@ public class ItemHorseArmorBase extends ItemHorseArmor {
     
     }
     
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void addInformation (ItemStack stack, EntityPlayer reader, List tip, boolean isDebug) {
+        
+        tip.add(StatCollector.translateToLocal("tooltip.morehorsearmor.protection") + ": " + this.armorPoints);
+    }
+    
     /**
      * If the EntityHorse is hit by a player/mob, the damage can be cancelled
      *
      * @param entityHorse: The horse that is being hit
-     * @param amount : The amount of damage dealt to the horse
-     * @param attacker : The entity that is hitting the horse
-     * @return: Should the event be cancelled
+     * @param amount: The amount of damage dealt to the horse
+     * @param attacker: The entity that is hitting the horse
+     * @return boolean: Should the event be cancelled
      */
     public boolean damage (EntityHorse entityHorse, float amount, Entity attacker) {
         
