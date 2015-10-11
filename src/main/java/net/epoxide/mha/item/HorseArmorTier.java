@@ -22,7 +22,8 @@ public class HorseArmorTier {
     private String tierName;
     
     /**
-     * A string based ID to use in the crafting recipe for this tier.
+     * A string that contains the item id and damage value of the item used to craft this tiers
+     * horse armor.
      */
     private String recipeString;
     
@@ -72,16 +73,24 @@ public class HorseArmorTier {
     
     /**
      * Retrieves a damage sensitive representation of the item used to craft this armor.
+     * 
      * @return ItemStack: An ItemStack which represents the item used to craft this armor.
      */
-    public ItemStack getRecipeItem() {
+    public ItemStack getRecipeItem () {
         
         return Utilities.createStackFromString(this.recipeString);
     }
     
+    public String getRecipeString() {
+        
+        return this.recipeString;
+    }
+    
     /**
      * Sets the recipe string used for this armor tier.
-     * @param recipeString: A string containing item id and damage of the material used to craft the armor of this tier.
+     * 
+     * @param recipeString: A string containing item id and damage of the material used to
+     *            craft the armor of this tier.
      */
     public void setRecipeString (String recipeString) {
         
