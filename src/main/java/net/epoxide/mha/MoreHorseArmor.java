@@ -7,11 +7,9 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.epoxide.mha.addon.AddonBotania;
 import net.epoxide.mha.common.ProxyCommon;
-import net.epoxide.mha.handler.HorseHandler;
 import net.epoxide.mha.handler.MHAConfigurationHandler;
 import net.epoxide.mha.item.ItemManager;
 import net.epoxide.mha.util.Constants;
-import net.minecraftforge.common.MinecraftForge;
 
 @Mod(modid = Constants.MOD_ID, name = Constants.MOD_NAME, version = Constants.VERSION_NUMBER, guiFactory = Constants.FACTORY, dependencies = "required-after:bookshelf;after:Botania")
 public class MoreHorseArmor {
@@ -30,7 +28,5 @@ public class MoreHorseArmor {
         
         if (Loader.isModLoaded("Botania"))
             new AddonBotania();
-            
-        MinecraftForge.EVENT_BUS.register(new HorseHandler());
     }
 }

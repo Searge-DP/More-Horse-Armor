@@ -10,11 +10,11 @@ import net.darkhax.bookshelf.util.Utilities;
 import net.epoxide.mha.handler.MHAConfigurationHandler;
 import net.minecraft.client.renderer.entity.RendererLivingEntity;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.StatCollector;
 
 public class ItemHorseArmorBase extends ItemHorseArmor {
@@ -79,6 +79,12 @@ public class ItemHorseArmorBase extends ItemHorseArmor {
     }
     
     @Override
+    public boolean onHorseDamaged (EntityHorse horse, ItemStack stack, DamageSource source, float damage) {
+        
+        return false;
+    }
+    
+    @Override
     @SideOnly(Side.CLIENT)
     public String getArmorTexture (EntityHorse horse, ItemStack stack) {
         
@@ -99,19 +105,6 @@ public class ItemHorseArmorBase extends ItemHorseArmor {
     }
     
     /**
-     * If the EntityHorse is hit by a player/mob, the damage can be cancelled
-     *
-     * @param entityHorse: The horse that is being hit
-     * @param amount: The amount of damage dealt to the horse
-     * @param attacker: The entity that is hitting the horse
-     * @return boolean: Should the event be cancelled
-     */
-    public boolean damage (EntityHorse entityHorse, float amount, Entity attacker) {
-        
-        return false;
-    }
-    
-    /**
      * Checks an ItemStack for a custom armor value written in it's NBT. Allows for HorseArmor
      * to be given a special armor value from NBT.
      *
@@ -126,5 +119,4 @@ public class ItemHorseArmorBase extends ItemHorseArmor {
         NBTTagCompound dataTag = stack.getTagCompound();
         return dataTag.hasKey("armorValue") ? dataTag.getInteger("armorValue") : -1;
     }
-    
 }

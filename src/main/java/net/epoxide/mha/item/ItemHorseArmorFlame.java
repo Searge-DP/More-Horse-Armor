@@ -1,7 +1,10 @@
 package net.epoxide.mha.item;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityHorse;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 
 public class ItemHorseArmorFlame extends ItemHorseArmorBase {
@@ -12,9 +15,13 @@ public class ItemHorseArmorFlame extends ItemHorseArmorBase {
     }
     
     @Override
-    public boolean damage (EntityHorse entityHorse, float amount, Entity attacker) {
+    public boolean onHorseDamaged (EntityHorse horse, ItemStack stack, DamageSource source, float damage) {
         
-        attacker.setFire(MathHelper.ceiling_float_int(amount / 2));
+        Entity attacker = source.getEntity();
+        
+        if (attacker instanceof EntityLivingBase)
+            attacker.setFire(MathHelper.ceiling_float_int(damage / 2));
+            
         return false;
     }
 }
