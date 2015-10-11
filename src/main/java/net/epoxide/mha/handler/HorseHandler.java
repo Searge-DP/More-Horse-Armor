@@ -20,7 +20,7 @@ public class HorseHandler {
 
             AnimalChest chest = ObfuscationReflectionHelper.getPrivateValue(EntityHorse.class, entityHorse, "horseChest", "");
             ItemStack armor = chest.getStackInSlot(1);
-            if (armor.getItem() instanceof ItemHorseArmorBase) {
+            if (armor != null && armor.getItem() instanceof ItemHorseArmorBase) {
                 event.setCanceled(((ItemHorseArmorBase) armor.getItem()).damage(entityHorse, event.ammount, event.source.getEntity()));
             }
         }
