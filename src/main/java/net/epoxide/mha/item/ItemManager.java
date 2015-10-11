@@ -6,15 +6,16 @@ import net.minecraft.item.ItemStack;
 
 public class ItemManager {
     
-    // public static final Item itemHorseArmorFlying = addTierRecipe(new
-    // ItemHorseArmorFlying("flying", 11), "");
-    // public static final Item itemHorseArmorFlame = addTierRecipe(new
-    // ItemHorseArmorFlame("flame", 11), "");
-    // public static final Item itemHorseArmorNature = addTierRecipe(new
-    // ItemHorseArmorNature("nature", 11), "");
-    
     public ItemManager() {
-    
+        
+        ItemHorseArmorBase flying = new ItemHorseArmorFlying("flying", 11);
+        // TODO flying recipe
+        
+        ItemHorseArmorBase flame = new ItemHorseArmorFlame("flame", 11);
+        // TODO flame recipe
+        
+        ItemHorseArmorBase nature = new ItemHorseArmorNature("nature", 11);
+        // TODO nature recipe
     }
     
     /**

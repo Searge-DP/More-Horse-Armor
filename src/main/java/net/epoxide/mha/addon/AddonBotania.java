@@ -14,7 +14,7 @@ public class AddonBotania {
         addHorseArmor(new HorseArmorTier("terrasteel", 6, "Botania:manaResource#0"));
     }
     
-    public void addHorseArmor(HorseArmorTier tier) {
+    public void addHorseArmor (HorseArmorTier tier) {
         
         MHAConfigurationHandler.configureArmorTier(tier);
         tier.setItem(new ItemHorseArmorBase(tier));
