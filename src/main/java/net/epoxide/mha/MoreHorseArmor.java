@@ -10,7 +10,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.epoxide.mha.addon.AddonBotania;
 import net.epoxide.mha.common.ProxyCommon;
-import net.epoxide.mha.handler.MHAConfigurationHandler;
+import net.epoxide.mha.handler.*;
 import net.epoxide.mha.item.ItemManager;
 import net.epoxide.mha.util.Constants;
 import net.minecraft.item.Item;
@@ -31,11 +31,10 @@ public class MoreHorseArmor {
 
         if(Loader.isModLoaded("Botania"))
             new AddonBotania();
-        
+
         new ItemManager();
+        MinecraftForge.EVENT_BUS.register(new HorseHandler());
         new MHAConfigurationHandler(event.getSuggestedConfigurationFile());
-        
-        MinecraftForge.EVENT_BUS.register(this);
     }
     
     @EventHandler
@@ -46,12 +45,5 @@ public class MoreHorseArmor {
     @EventHandler
     public void postInit (FMLPostInitializationEvent event) {
     
-    }
-    
-    @SubscribeEvent
-    public void onTooltipDisplayed(ItemTooltipEvent event) {
-        
-        if (event.itemStack != null && event.itemStack.getItem() != null)
-            event.toolTip.add("Name: " + Item.itemRegistry.getNameForObject(event.itemStack.getItem()));
     }
 }
