@@ -2,7 +2,6 @@ package net.epoxide.mha.handler;
 
 import java.io.File;
 
-import net.darkhax.bookshelf.util.Utilities;
 import net.epoxide.mha.item.HorseArmorTier;
 import net.minecraftforge.common.config.Configuration;
 
