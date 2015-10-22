@@ -115,7 +115,7 @@ public class ItemHorseArmorBase extends ItemHorseArmor {
      */
     public static int checkArmorNBT (ItemStack stack) {
         
-        Utilities.preparedataTag(stack);
+        Utilities.prepareDataTag(stack);
         NBTTagCompound dataTag = stack.getTagCompound();
         return dataTag.hasKey("armorValue") ? dataTag.getInteger("armorValue") : -1;
     }
