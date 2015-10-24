@@ -23,8 +23,9 @@ repositories {
 }
 
 apply plugin: 'forge'
+project.ext.mcVersion = "1.7.10"
 
-version = "1.0"
+version = getVersionFromJava(file("src/main/java/net/epoxide/mha/util/Constants.java"))
 group = "net.epoxide.mha"
 archivesBaseName = "MoreHorseArmor"
 
@@ -34,40 +35,54 @@ minecraft {
 }
 
 dependencies {
-    compile "net.darkhax.bookshelf:Bookshelf:1.7.10-1.0.0.12:deobf"
+    compile "net.darkhax.bookshelf:Bookshelf:1.7.10-1.1.0.41:deobf"
 }
 
-task buildInfo() {
-    def cmd = "git rev-parse --short HEAD"
-    def proc = cmd.execute()
-    proc.waitFor()
-    if (proc.exitValue() == 0) {
-        ext.revision = "DEV." + proc.text.trim()
-    } else {
-        ext.revision = "GITBORK"
+String getVersionFromJava(File file) {
+    String projNumber = "0";
+    String major = "0";
+    String revision = "0";
+    String patch = "0";
+    String prefix = "public static final String VERSION = \"";
+    file.eachLine { String s ->
+
+        s = s.trim();
+        if (s.startsWith(prefix)) {
+            s = s.substring(prefix.length(), s.length() - 2);
+            String[] pts = s.split("\\.");
+
+            projNumber = pts[0];
+            major = pts[1];
+            revision = pts[2];
+        }
     }
 
-    if (System.getenv().BUILD_NUMBER != null) {
-        ext.buildNum = "${System.getenv().BUILD_NUMBER}"
-    } else {
-        ext.buildNum = "${project.buildInfo.revision}"
+    if (System.getenv().containsKey("BUILD_NUMBER")) {
+        patch = System.getenv("BUILD_NUMBER");
     }
+
+    return "1.7.10-$projNumber.$major.$revision.$patch";
 }
 
-ext.artifact_version = 'NFG'
-if (System.getenv().ARTIFACT_VERSION == null) {
-    artifact_version = "${version}.${project.buildInfo.buildNum}"
-}
+task writeBuildNumber << {
+    def file = file("src/main/java/net/darkhax/bookshelf/util/Constants.java");
+    def bn = System.getenv("BUILD_NUMBER") ?: 0;
+    def outfile = "";
+    def ln = System.getProperty("line.separator")
 
-if(System.getenv().ARTIFACT_VERSION != null) {
-    artifact_version = "${system.getenv().ARTIFACT_VERSION}"
-}
+    file.eachLine { String s ->
+        if (s.contains("PATCH_VERSION") && s.contains("= \"0\"")) {
+            s = "    public static final String PATCH_VERSION = \"${bn}\";";
+        }
+        outfile += (s + ln);
+    }
 
-version = "1.7.10-${artifact_version}"
+    file.write(outfile);
+}
 
 processResources {
     // this will ensure that this task is redone when the versions change.
-    inputs.property "version", project.artifact_version
+    inputs.property "version", project.version
     inputs.property "mcversion", project.minecraft.version
 
     // replace stuff in mcmod.info, nothing else
@@ -75,7 +90,7 @@ processResources {
         include 'mcmod.info'
 
         // replace version and mcversion
-        expand 'version': project.artifact_version, 'mcversion': project.minecraft.version
+        expand 'version': project.version, 'mcversion': project.minecraft.version
     }
 
     // copy everything else, thats not the mcmod.info
