@@ -1,6 +1,6 @@
 package net.epoxide.mha.item;
 
-import net.darkhax.bookshelf.util.Utilities;
+import net.darkhax.bookshelf.lib.util.ItemStackUtils;
 import net.minecraft.item.ItemStack;
 
 public class HorseArmorTier {
@@ -78,7 +78,7 @@ public class HorseArmorTier {
      */
     public ItemStack getRecipeItem () {
         
-        return Utilities.createStackFromString(this.recipeString);
+        return ItemStackUtils.createStackFromString(this.recipeString);
     }
     
     public String getRecipeString () {
