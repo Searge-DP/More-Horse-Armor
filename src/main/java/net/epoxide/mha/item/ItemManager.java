@@ -3,20 +3,20 @@ package net.epoxide.mha.item;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.epoxide.mha.handler.MHAConfigurationHandler;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class ItemManager {
     
-    public ItemManager() {
+    public static Item flying;
+    public static Item flame;
+    public static Item nature;
+    
+    public static void initItems () {
         
-        ItemHorseArmorBase flying = new ItemHorseArmorFlying("flying", 11);
-        // TODO flying recipe
-        
-        ItemHorseArmorBase flame = new ItemHorseArmorFlame("flame", 11);
-        // TODO flame recipe
-        
-        ItemHorseArmorBase nature = new ItemHorseArmorNature("nature", 11);
-        // TODO nature recipe
+        flying = new ItemHorseArmorFlying("flying", 11);
+        flame = new ItemHorseArmorFlame("flame", 11);
+        nature = new ItemHorseArmorNature("nature", 11);
     }
     
     /**

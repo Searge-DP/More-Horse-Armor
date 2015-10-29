@@ -6,7 +6,8 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.darkhax.bookshelf.items.ItemHorseArmor;
-import net.darkhax.bookshelf.util.Utilities;
+import net.darkhax.bookshelf.lib.util.ItemStackUtils;
+import net.epoxide.mha.MoreHorseArmor;
 import net.epoxide.mha.handler.MHAConfigurationHandler;
 import net.minecraft.client.renderer.entity.RendererLivingEntity;
 import net.minecraft.creativetab.CreativeTabs;
@@ -43,6 +44,7 @@ public class ItemHorseArmorBase extends ItemHorseArmor {
     public ItemHorseArmorBase(HorseArmorTier tier) {
         
         this(tier.getTierName(), tier.getProtectionAmount());
+        this.setCreativeTab(MoreHorseArmor.tabHorseArmor);
         tier.setProtectionAmount(this.armorPoints);
     }
     
@@ -115,7 +117,7 @@ public class ItemHorseArmorBase extends ItemHorseArmor {
      */
     public static int checkArmorNBT (ItemStack stack) {
         
-        Utilities.prepareDataTag(stack);
+        ItemStackUtils.prepareDataTag(stack);
         NBTTagCompound dataTag = stack.getTagCompound();
         return dataTag.hasKey("armorValue") ? dataTag.getInteger("armorValue") : -1;
     }

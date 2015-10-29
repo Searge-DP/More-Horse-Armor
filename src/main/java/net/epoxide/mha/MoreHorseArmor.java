@@ -10,6 +10,7 @@ import net.epoxide.mha.common.ProxyCommon;
 import net.epoxide.mha.handler.MHAConfigurationHandler;
 import net.epoxide.mha.item.ItemManager;
 import net.epoxide.mha.util.Constants;
+import net.minecraft.creativetab.CreativeTabs;
 
 @Mod(modid = Constants.MOD_ID, name = Constants.MOD_NAME, version = Constants.VERSION_NUMBER, guiFactory = Constants.FACTORY, dependencies = "required-after:bookshelf;after:Botania")
 public class MoreHorseArmor {
@@ -20,11 +21,13 @@ public class MoreHorseArmor {
     @Mod.Instance(Constants.MOD_ID)
     public static MoreHorseArmor instance;
     
+    public static CreativeTabs tabHorseArmor = new CreativeTabHorseArmor();
+    
     @EventHandler
     public void preInit (FMLPreInitializationEvent event) {
         
         new MHAConfigurationHandler(event.getSuggestedConfigurationFile());
-        new ItemManager();
+        ItemManager.initItems();
         
         if (Loader.isModLoaded("Botania"))
             new AddonBotania();
