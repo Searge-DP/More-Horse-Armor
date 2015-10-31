@@ -35,7 +35,7 @@ minecraft {
 }
 
 dependencies {
-    compile "net.darkhax.bookshelf:Bookshelf:1.7.10-1.1.0.41:deobf"
+    compile "net.darkhax.bookshelf:Bookshelf:1.7.10-1.0.3.72:deobf"
 }
 
 String getVersionFromJava(File file) {
@@ -99,15 +99,25 @@ processResources {
     }
 }
 
-task deobfJar(type: Jar) {
+itask sourcesJar(type: Jar, dependsOn: classes) {
+    from sourceSets.main.allSource
+    classifier = 'sources'
+}
 
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    from javadoc.destinationDir
+    classifier = 'javadoc'
+}
+
+task deobfJar(type: Jar) {
     from sourceSets.main.output
-    classifier = 'deobf'
+    classifier = "deobf"
 }
 
 artifacts {
-
     archives deobfJar
+    archives sourcesJar
+    archives javadocJar
 }
 
 uploadArchives {
